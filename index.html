@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>progress</title>
+    <style>
+      .body {
+        overflow-x: hidden;
+      }
+      .outer {
+        height: 10px;
+        width: 200px;
+        background-color: red;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .inner {
+        background-color: blue;
+        height: 100%;
+        width: 0%;
+      }
+      .cont {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+      }
+      .on {
+        display: none;
+      }
+
+      .on.active {
+        display: block;
+      }
+
+      .tw {
+        display: none;
+      }
+
+      .tw.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body class="body">
+    <h1 class="h1">Progress</h1>
+
+    <div class="cont">
+      <div class="outer">
+        <div class="inner one"></div>
+      </div>
+      <div class="outer">
+        <div class="inner two"></div>
+      </div>
+      <div class="outer">
+        <div class="inner three"></div>
+      </div>
+    </div>
+
+    <div class="content"></div>
+
+    <div class="on">willi willi</div>
+    <div class="tw">this is group 2</div>
+
+    <script>
+      const group = "one";
+      const progOne = document.querySelector(`.inner.${group}`);
+      const one = document.querySelector(".on");
+      const content = document.querySelector(".content");
+      const two = document.querySelector(".tw");
+      progOne.style.width = "0%";
+      setInterval(function () {
+        if (Number(progOne.style.width.replace("%", "")) + 1 === 100) {
+          progOne.style.width = "0%";
+        }
+
+        progOne.style.width = `${String(
+          Number(progOne.style.width.replace("%", "")) + 1
+        )}%`;
+
+        /** using classes
+        if (group === "one") {
+          one.classList.toggle("active");
+        } else if (group === "two") {
+          two.classList.toggle("active");
+        }
+        **/
+
+        /** using javascript insert
+        if (group === "one") {
+          content.innerHTML = `<div class="on">willi willi</div>`;
+        } else if (group === "two") {
+          content.innerHTML = `<div class="tw">this is group 2</div>`;
+        }
+        **/
+      }, 10);
+    </script>
+  </body>
+</html>
